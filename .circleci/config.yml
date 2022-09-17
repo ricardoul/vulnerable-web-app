@@ -1,15 +1,15 @@
 version: 2
 jobs:
   build:
-    machine:
+    docker:
       image: cimg/base:2022.09
     steps:
       - checkout
       - run:
-          name: docker-compose build
-          command: docker-compose build
+          name: docker build
+          command: docker build
   deploy:
-    machine:
+    docker:
       image: cimg/base:2022.09
     steps:
       - checkout
