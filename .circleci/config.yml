@@ -27,8 +27,6 @@ jobs:
       - anchore/analyze_local_image:
           dockerfile_path: ./Dockerfile
           image_name: 'example/test:latest'
-          policy_bundle_file_path: .circleci/.anchore/policy_bundle.json
-          policy_failure: true
           timeout: '500'
       - anchore/parse_reports
       - store_artifacts:
