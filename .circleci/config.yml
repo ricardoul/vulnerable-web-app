@@ -26,8 +26,8 @@ jobs:
             else
               echo Heroku successfully installed.
             fi
-      - push-docker-image
-      - release-docker-image
+      - heroku/push-docker-image
+      - heroku/release-docker-image
 
 workflows:
   build:
