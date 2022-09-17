@@ -4,6 +4,7 @@ version: 2.1
 # release must exist.);
 orbs:
   heroku: circleci/heroku@1.2.6
+  anchore-engine: anchore/anchore-engine@1.9.0
 
 jobs:
   # This job is an example of an integration testing job.
@@ -18,6 +19,18 @@ jobs:
       - checkout
       - heroku/install
       - heroku/check-authentication
+      - run:
+          command: 'docker build -t "example/test:latest" .'
+          name: build container
+      - anchore/analyze_local_image:
+          dockerfile_path: ./Dockerfile
+          image_name: 'example/test:latest'
+          policy_bundle_file_path: .circleci/.anchore/policy_bundle.json
+          policy_failure: true
+          timeout: '500'
+      - anchore/parse_reports
+      - store_artifacts:
+          path: anchore-reports
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
