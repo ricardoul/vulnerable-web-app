@@ -1,23 +1,21 @@
-description: >
-  'A simple example of a job utilizing the `install` and `deploy-via-git` commands.'
-usage:
-  version: 2.1
-  orbs:
+version: 2.1
+
+orbs:
     heroku: circleci/heroku@1.2.6
 
-  workflows:
-    heroku_deploy:
-      jobs:
-        - deploy
+workflows:
+  heroku_deploy:
+    jobs:
+      - deploy
 
-  jobs:
-    deploy:
-      executor:
-        heroku/default
-      steps:
-        - checkout
-        - heroku/install
-        - run:
-            - install
-            - push-docker-image
-            - release-docker-image
+jobs:
+  deploy:
+    executor:
+      heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - run:
+          - install
+          - push-docker-image
+          - release-docker-image
