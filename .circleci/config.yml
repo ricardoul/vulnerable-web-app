@@ -39,7 +39,7 @@ jobs:
             if [[ $(command -v heroku) == "" ]]; then
               echo " Heroku is not installed! "; exit 1;
             else
-              echo Heroku successfully installed.
+              echo Heroku successfully installed..
             fi
       - heroku/push-docker-image:
           app-name: $HEROKU_APP_NAME
