@@ -28,11 +28,11 @@ jobs:
               echo Heroku successfully installed.
             fi
       - heroku/push-docker-image:
-        app-name: $HEROKU_APP_NAME
-        process-types: web
+          app-name: $HEROKU_APP_NAME
+          process-types: web
       - heroku/release-docker-image:
-        app-name: $HEROKU_APP_NAME
-        process-types: web
+          app-name: $HEROKU_APP_NAME
+          process-types: web
 
 workflows:
   build:
