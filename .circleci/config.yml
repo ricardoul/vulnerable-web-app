@@ -1,21 +1,33 @@
 version: 2.1
 
+# add your orb below, to be used in integration tests (note: a @dev:alpha
+# release must exist.);
 orbs:
-    heroku: circleci/heroku@1.2.6
-
-workflows:
-  heroku_deploy:
-    jobs:
-      - deploy
+  heroku: circleci/heroku@1.2.6
 
 jobs:
-  deploy:
-    executor:
-      heroku/default
+  # This job is an example of an integration testing job.
+  # This job should execute a command from your orb and verify
+  # the output is as expected, otherwise the job should fail.
+  #
+  # Rename this job and add more as needed.
+  #
+  builddeploy:
+    executor: heroku/default
     steps:
       - checkout
       - heroku/install
+      - heroku/check-authentication
       - run:
-          - install
-          - push-docker-image
-          - release-docker-image
+          name: Check if Heroku is installed
+          command: |
+            if [[ $(command -v heroku) == "" ]]; then
+              echo " Heroku is not installed! "; exit 1;
+            else
+              echo Heroku successfully installed.
+            fi
+
+workflows:
+  build:
+    jobs:
+      - builddeploy
