@@ -10,7 +10,7 @@ jobs:
           docker_layer_caching: true
       - run:
           name: docker build
-          command: docker build
+          command: docker build .
   deploy:
     docker:
       image: cimg/base:2022.09
