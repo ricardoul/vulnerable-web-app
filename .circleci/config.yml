@@ -23,7 +23,7 @@ jobs:
       - run: docker build -t myrepo/myimage:tag .
       - run: docker run -d  --net=mynetwork  --name myapp -p 8080:8080 myrepo/myimage:tag
       - run: docker pull owasp/zap2docker-stable
-      - run: docker run --net=mynetwork -d  owasp/zap2docker-stable:latest zap-full-scan.py -d -t http://myapp:8080
+      - run: docker run --net=mynetwork  owasp/zap2docker-stable:latest zap-full-scan.py -d -t http://myapp:8080
       - snyk/scan:
           docker-image-name: 'myrepo/myimage:tag'
           fail-on-issues: false
