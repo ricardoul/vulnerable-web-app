@@ -23,7 +23,8 @@ jobs:
       - snyk/scan:
           docker-image-name: 'myrepo/myimage:tag'
           fail-on-issues: false
-      - run: 'curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash'
+      - run: |
+          curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
       - run: fossa analyze
       - heroku/install
       - heroku/check-authentication
