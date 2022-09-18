@@ -26,9 +26,6 @@ jobs:
       - heroku/install
       - heroku/check-authentication
       - sonarcloud/scan
-
-
-
       - run:
           name: Check if Heroku is installed
           command: |
@@ -43,6 +40,8 @@ jobs:
       - heroku/release-docker-image:
           app-name: $HEROKU_APP_NAME
           process-types: web
+      - probely/scan:
+          target_id: miyQ29EJCMBu
 
 workflows:
   build:
