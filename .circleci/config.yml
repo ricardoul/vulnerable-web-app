@@ -5,6 +5,7 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@1.2.6
   grype: anchore/grype@0.2.0
+  sonarcloud: sonarsource/sonarcloud@1.1.1
 
 jobs:
   # This job is an example of an integration testing job.
@@ -21,6 +22,7 @@ jobs:
           docker_layer_caching: true
       - heroku/install
       - heroku/check-authentication
+      - sonarcloud/scan
       - run:
           command: 'docker build -t "example/test:latest" .'
           name: build container
