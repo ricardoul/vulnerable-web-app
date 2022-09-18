@@ -12,8 +12,6 @@ jobs:
   # This job should execute a command from your orb and verify
   # the output is as expected, otherwise the job should fail.
   #
-  # Rename this job and add more as needed.
-  #
   builddeploy:
     executor: heroku/default
     steps:
