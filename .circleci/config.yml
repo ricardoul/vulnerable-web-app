@@ -21,8 +21,8 @@ jobs:
       - run: docker build -t myrepo/myimage:tag .
       - run: mkdir -p workspace
       - snyk/scan:
-        docker-image-name: myrepo/myimage:tag
-        fail-on-issues: false
+          docker-image-name: 'myrepo/myimage:tag'
+          fail-on-issues: false
       - heroku/install
       - heroku/check-authentication
       - sonarcloud/scan
