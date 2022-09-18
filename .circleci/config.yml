@@ -22,10 +22,16 @@ jobs:
       - run: docker network create ${CIRCLE_WORKFLOW_ID}
       - run: docker build -t myrepo/myimage:tag .
       - run: docker run -d  --net=${CIRCLE_WORKFLOW_ID}  --name myapp -p 8080:8080 myrepo/myimage:tag
-      - run: wget https://github.com/Arachni/arachni/releases/download/v1.5.1/arachni-1.5.1-0.5.12-linux-x86_64.tar.gz
-      - run: tar xvf arachni-1.5.1-0.5.12-linux-x86_64.tar.gz
-      - run: docker ps
-      - run: ~/project/arachni-1.5.1-0.5.12/bin/arachni http://0.0.0.0:8080
+      - run:
+          name: Install arachni
+          command: |
+            docker run --net=${CIRCLE_WORKFLOW_ID} -d \
+            -p 222:22 \
+            -p 7331:7331 \
+            -p 9292:9292 \
+            --name arachni \
+            arachni/arachni:latest
+      - run: docker exec -it arachni sh -c "/usr/local/arachni/bin/arachni http://myapp:8080"
       - run: docker pull owasp/zap2docker-stable
       - run: docker run --net=${CIRCLE_WORKFLOW_ID}  owasp/zap2docker-stable:latest zap-full-scan.py -I -d -t  http://myapp:8080
       - snyk/scan:
