@@ -25,6 +25,7 @@ jobs:
       - run: wget https://github.com/Arachni/arachni/releases/download/v1.5.1/arachni-1.5.1-0.5.12-linux-x86_64.tar.gz
       - run: tar xvf arachni-1.5.1-0.5.12-linux-x86_64.tar.gz
       - run: CID=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' myapp)
+      - run: docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' myapp
       - run: ~/project/arachni-1.5.1-0.5.12/bin/arachni http://${CID}:8080
       - run: docker pull owasp/zap2docker-stable
       - run: docker run --net=${CIRCLE_WORKFLOW_ID}  owasp/zap2docker-stable:latest zap-full-scan.py -I -d -t  http://myapp:8080
