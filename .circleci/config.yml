@@ -24,8 +24,8 @@ jobs:
       - run:
           command: 'docker build -t "example/test:latest" .'
           name: build container
-        - grype/list-dir-vulns:
-            path-to-scan: ./
+      - grype/list-dir-vulns:
+          path-to-scan: ./
       - run:
           name: Check if Heroku is installed
           command: |
