@@ -4,7 +4,7 @@ version: 2.1
 # release must exist.);
 orbs:
   heroku: circleci/heroku@1.2.6
-  anchore: anchore/anchore-engine@1
+  grype: anchore/grype@0.2.0
 
 jobs:
   # This job is an example of an integration testing job.
@@ -24,13 +24,8 @@ jobs:
       - run:
           command: 'docker build -t "example/test:latest" .'
           name: build container
-      - anchore/analyze_local_image:
-          dockerfile_path: ./Dockerfile
-          image_name: 'example/test:latest'
-          timeout: '500'
-      - anchore/parse_reports
-      - store_artifacts:
-          path: anchore-reports
+        - grype/list-dir-vulns:
+            path-to-scan: ./
       - run:
           name: Check if Heroku is installed
           command: |
