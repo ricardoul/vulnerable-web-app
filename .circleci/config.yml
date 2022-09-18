@@ -4,7 +4,7 @@ version: 2.1
 # release must exist.);
 orbs:
   heroku: circleci/heroku@1.2.6
-  grype: 'anchore/grype@dev:alpha'
+  grype: anchore/grype
 
 jobs:
   # This job is an example of an integration testing job.
