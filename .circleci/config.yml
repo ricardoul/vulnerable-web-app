@@ -20,7 +20,6 @@ jobs:
           docker_layer_caching: true
       - run: docker build -t myrepo/myimage:tag .
       - run: mkdir -p workspace
-      # - run: docker save myrepo/myimage:tag -o workspace/image.tar
       - snyk/scan:
         docker-image-name: myrepo/myimage:tag
         fail-on-issues: false
