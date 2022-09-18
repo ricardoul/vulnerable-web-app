@@ -8,6 +8,7 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@1.1.1
   snyk: snyk/snyk@1.2.3
   probely: probely/security-scan@1.1.3
+  fossa-cli: fossa/cli@0.0.3
 
 jobs:
   # This job should execute a command from your orb and verify
@@ -24,6 +25,7 @@ jobs:
       - snyk/scan:
           docker-image-name: 'myrepo/myimage:tag'
           fail-on-issues: false
+      - fossa-cli/analyze
       - heroku/install
       - heroku/check-authentication
       - sonarcloud/scan
