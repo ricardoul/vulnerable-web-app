@@ -1,4 +1,6 @@
 # Una aplicación vulnerable para aplicar seguridad
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fricardoul%2Fvulnerable-web-app.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fricardoul%2Fvulnerable-web-app?ref=badge_shield)
+
 
 ### Cómo Desplegar aplicación Docker NodeJS en Heroku de forma local
 
@@ -66,3 +68,7 @@ Ahora tienen que integrar herramientas de seguridad dentro del CICD
 
 ### Manos a la Obra
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fricardoul%2Fvulnerable-web-app.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fricardoul%2Fvulnerable-web-app?ref=badge_large)
