@@ -6,7 +6,7 @@ orbs:
   heroku: circleci/heroku@1.2.6
   grype: anchore/grype@0.2.0
   sonarcloud: sonarsource/sonarcloud@1.1.1
-  vulnerability-checker: whitesource/vulnerability-checker@19.10.1
+  snyk: snyk/snyk@1.2.3
 
 jobs:
   # This job should execute a command from your orb and verify
@@ -20,13 +20,17 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - vulnerability-checker/scan
+      - run: docker build -t myrepo/myimage:tag .
+      - run: mkdir -p workspace
+      - run: docker save myrepo/myimage:tag -o workspace/image.tar
+      - snyk/scan:
+        docker-image-name: myrepo/myimage:tag
       - heroku/install
       - heroku/check-authentication
       - sonarcloud/scan
-      - run:
-          command: 'docker build -t "example/test:latest" .'
-          name: build container
+
+
+
       - run:
           name: Check if Heroku is installed
           command: |
